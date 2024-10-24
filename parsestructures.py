@@ -2,6 +2,7 @@ from pprint import pprint
 import numpy as np
 from ase import Atoms
 from ase.io import write
+from ase.units import Bohr
 
 
 data = open("structures.txt").read()
@@ -14,6 +15,6 @@ positions = [np.array([x[1:][0] for x in y]) for y in ds4]
 
 atoms_list = []
 for name, position in zip(names, positions, strict=True):
-    atoms_list.append(Atoms(name, positions=position))
+    atoms_list.append(Atoms(name, positions=position * Bohr))
 
 write("structures.extxyz", atoms_list)
